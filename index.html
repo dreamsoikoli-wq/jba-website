@@ -1,130 +1,441 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jengraimukh Badminton Association (JBA), Majuli, Assam. Promoting badminton and building champions together.">
+  <meta name="theme-color" content="#a90925">
   <title>JBA | Jengraimukh Badminton Association</title>
   <style>
+    :root {
+      --red: #b20d2b;
+      --red-dark: #85071e;
+      --ink: #171717;
+      --muted: #666;
+      --paper: #fff;
+      --soft: #f7f4f4;
+      --line: #eadfe1;
+      --shadow: 0 12px 35px rgba(40, 10, 18, .09);
+    }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 86px; }
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f8f8f8;
-      color: #222;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
     }
-    header {
-      background: #b5121b;
-      color: white;
-      padding: 22px 8%;
+    a { color: inherit; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,.97);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 3px 16px rgba(0,0,0,.04);
+      backdrop-filter: blur(10px);
+    }
+    .nav-wrap {
+      max-width: 1180px;
+      margin: auto;
+      min-height: 82px;
+      padding: 10px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
+      gap: 22px;
     }
-    header h2 { margin: 0; }
-    nav a {
-      color: white;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
       text-decoration: none;
-      margin: 8px;
-      font-weight: bold;
+      min-width: 0;
+    }
+    .brand img {
+      width: 62px;
+      height: 62px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: white;
+    }
+    .brand-name { min-width: 0; }
+    .brand-name strong {
+      display: block;
+      color: var(--red-dark);
+      font-size: 17px;
+      line-height: 1.25;
+    }
+    .brand-name span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .3px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 21px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+    }
+    .nav-links a:hover { color: var(--red); }
+    .nav-links .login-link {
+      color: white;
+      background: var(--red);
+      padding: 10px 16px;
+      border-radius: 7px;
+    }
+    .nav-links .login-link:hover { background: var(--red-dark); color: white; }
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 7px;
+      padding: 8px 11px;
+      font-size: 21px;
+      cursor: pointer;
     }
     .hero {
-      background: #8e1018;
+      position: relative;
+      overflow: hidden;
       color: white;
-      text-align: center;
-      padding: 85px 20px;
+      background:
+        radial-gradient(ellipse at 82% 18%, rgba(255,255,255,.16), transparent 32%),
+        linear-gradient(120deg, #78051c 0%, #b20d2b 55%, #d12a45 100%);
     }
-    .hero h1 { font-size: 38px; }
-    .hero p { font-size: 18px; }
+    .hero::after {
+      content: "🏸";
+      position: absolute;
+      right: 8%;
+      bottom: -58px;
+      font-size: clamp(150px, 27vw, 330px);
+      opacity: .10;
+      transform: rotate(-25deg);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1180px;
+      min-height: 390px;
+      margin: auto;
+      padding: 76px 22px 82px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .eyebrow {
+      margin: 0 0 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #ffdce3;
+    }
+    .hero h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.08;
+      letter-spacing: -.8px;
+    }
+    .hero p {
+      max-width: 620px;
+      margin: 20px 0 28px;
+      font-size: clamp(16px, 2vw, 19px);
+      color: #fff1f3;
+    }
+    .button-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 45px;
+      padding: 11px 19px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      transition: transform .18s, background .18s;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-light { background: white; color: var(--red-dark); }
+    .button-outline { border: 1px solid rgba(255,255,255,.75); color: white; }
     .section {
-      padding: 45px 8%;
-      text-align: center;
+      max-width: 1180px;
+      margin: auto;
+      padding: 68px 22px;
     }
+    .section-heading { text-align: center; margin: 0 auto 32px; max-width: 700px; }
+    .section-heading .eyebrow { color: var(--red); margin-bottom: 7px; }
+    .section-heading h2 { margin: 0 0 10px; font-size: clamp(26px, 3vw, 35px); }
+    .section-heading p { margin: 0; color: var(--muted); }
+    .intro {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 42px;
+    }
+    .intro h2 { margin: 0 0 13px; font-size: 30px; }
+    .intro p { color: var(--muted); margin: 0 0 14px; }
+    .intro-mark {
+      min-height: 220px;
+      display: grid;
+      place-items: center;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+    }
+    .intro-mark img { width: min(220px, 75%); height: auto; border-radius: 50%; }
+    .soft-section { background: var(--soft); }
+    .soft-section .section { padding-top: 68px; padding-bottom: 68px; }
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
     }
     .card {
       background: white;
-      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 24px 21px;
+      box-shadow: 0 5px 18px rgba(40,10,18,.04);
+    }
+    .card-icon {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
       border-radius: 10px;
-      box-shadow: 0 2px 10px #ddd;
+      background: #fff0f3;
+      color: var(--red);
+      font-size: 23px;
+      margin-bottom: 15px;
     }
-    .card h3 { color: #b5121b; }
-    .login {
+    .card h3 { margin: 0 0 8px; color: var(--red-dark); font-size: 18px; }
+    .card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .card a {
       display: inline-block;
-      background: white;
-      color: #b5121b;
-      padding: 12px 25px;
-      border-radius: 5px;
+      margin-top: 14px;
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 700;
       text-decoration: none;
-      font-weight: bold;
     }
-    footer {
-      background: #222;
+    .member-panel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      padding: 30px;
       color: white;
+      background: linear-gradient(110deg, var(--red-dark), var(--red));
+      border-radius: 15px;
+    }
+    .member-panel h2 { margin: 0 0 7px; font-size: 25px; }
+    .member-panel p { margin: 0; color: #ffe9ed; }
+    .member-panel .button { flex-shrink: 0; }
+    .notice {
+      margin-top: 14px;
+      padding: 12px 15px;
+      background: #fff8e8;
+      border: 1px solid #f0dfb8;
+      border-radius: 8px;
+      color: #684d14;
+      font-size: 13px;
+    }
+    .contact-box {
       text-align: center;
-      padding: 22px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 30px 20px;
+    }
+    .contact-box h2 { margin: 0 0 8px; }
+    .contact-box p { margin: 5px 0; color: var(--muted); }
+    footer {
+      padding: 28px 20px;
+      text-align: center;
+      background: #191919;
+      color: #eee;
+    }
+    footer p { margin: 5px 0; font-size: 13px; }
+    footer .tagline { color: #f3b6c2; }
+    @media (max-width: 900px) {
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: 13px; }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 680px) {
+      .nav-wrap { min-height: 72px; padding: 8px 16px; }
+      .brand img { width: 51px; height: 51px; }
+      .brand-name strong { font-size: 14px; }
+      .brand-name span { font-size: 11px; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        padding: 14px 20px 20px;
+        background: white;
+        border-bottom: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 11px 4px; }
+      .nav-links .login-link { text-align: center; margin-top: 7px; }
+      .hero-inner { min-height: 355px; padding: 62px 20px; }
+      .intro { grid-template-columns: 1fr; gap: 22px; }
+      .intro-mark { min-height: 180px; }
+      .cards { grid-template-columns: 1fr; }
+      .section, .soft-section .section { padding: 50px 18px; }
+      .member-panel { align-items: flex-start; flex-direction: column; padding: 24px; }
     }
   </style>
 </head>
 <body>
-
-<header>
-  <h2>JBA</h2>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#events">Tournaments</a>
-    <a href="#results">Results</a>
-    <a href="#gallery">Gallery</a>
-  </nav>
-</header>
-
-<section class="hero" id="home">
-  <h1>Jengraimukh Badminton Association</h1>
-  <p>Promoting Badminton. Building Champions.</p>
-  <a class="login" href="login.html">Member Login</a>
-</section>
-
-<section class="section" id="about">
-  <h2>Welcome to JBA</h2>
-  <p>
-    Jengraimukh Badminton Association,
-    Majuli, Assam.
-    Together we promote badminton and encourage
-    young sporting talents.
-  </p>
-</section>
-
-<section class="section" id="events">
-  <h2>Our Activities</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>Tournaments</h3>
-      <p>Upcoming badminton events.</p>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="#home" aria-label="JBA home">
+        <img src="logo.jpeg" alt="JBA official logo">
+        <span class="brand-name">
+          <strong>Jengraimukh Badminton Association</strong>
+          <span>Majuli, Assam · Together Stronger</span>
+        </span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#activities">Activities</a>
+        <a href="#tournaments">Tournaments</a>
+        <a href="#gallery">Gallery</a>
+        <a class="login-link" href="#member-login">Member Login</a>
+      </nav>
     </div>
-    <div class="card" id="results">
-      <h3>Results</h3>
-      <p>Match results and achievements.</p>
-    </div>
-    <div class="card">
-      <h3>Our Players</h3>
-      <p>Meet our badminton players.</p>
-    </div>
-    <div class="card" id="gallery">
-      <h3>Gallery</h3>
-      <p>Memories from JBA events.</p>
-    </div>
-  </div>
-</section>
+  </header>
 
-<footer>
-  <p>© 2026 Jengraimukh Badminton Association</p>
-  <p>Majuli, Assam, India</p>
-</footer>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-inner">
+        <p class="eyebrow">Jengraimukh · Majuli · Assam</p>
+        <h1>Promoting Badminton.<br>Building Champions.</h1>
+        <p>Welcome to Jengraimukh Badminton Association — bringing players together, encouraging sporting talent and strengthening our badminton community.</p>
+        <div class="button-row">
+          <a class="button button-light" href="#about">Discover JBA</a>
+          <a class="button button-outline" href="#member-login">Member Login</a>
+        </div>
+      </div>
+    </section>
 
+    <section class="section intro" id="about">
+      <div>
+        <p class="eyebrow">Together Stronger</p>
+        <h2>Welcome to JBA</h2>
+        <p>Jengraimukh Badminton Association, based in Majuli, Assam, is committed to promoting badminton and encouraging young sporting talents.</p>
+        <p>We believe in sportsmanship, participation, discipline and building a stronger badminton community.</p>
+      </div>
+      <div class="intro-mark">
+        <img src="logo.jpeg" alt="Jengraimukh Badminton Association emblem">
+      </div>
+    </section>
+
+    <div class="soft-section">
+      <section class="section" id="activities">
+        <div class="section-heading">
+          <p class="eyebrow">Explore JBA</p>
+          <h2>Our Activities</h2>
+          <p>Follow association activities, competitions and the achievements of our players.</p>
+        </div>
+        <div class="cards">
+          <article class="card" id="tournaments">
+            <div class="card-icon">🏆</div>
+            <h3>Tournaments</h3>
+            <p>Updates about upcoming badminton events and competitions.</p>
+            <a href="#contact">Event information →</a>
+          </article>
+          <article class="card" id="results">
+            <div class="card-icon">🥇</div>
+            <h3>Results & Achievements</h3>
+            <p>Match results, winners and notable achievements from JBA players.</p>
+            <a href="#contact">See updates →</a>
+          </article>
+          <article class="card" id="players">
+            <div class="card-icon">🏸</div>
+            <h3>Our Players</h3>
+            <p>Celebrating the players and sporting talent in our association.</p>
+            <a href="#member-login">Member area →</a>
+          </article>
+          <article class="card" id="gallery">
+            <div class="card-icon">📸</div>
+            <h3>Photo Gallery</h3>
+            <p>Memories and photographs from JBA activities and events.</p>
+            <a href="#contact">Gallery updates →</a>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <section class="section" id="member-login">
+      <div class="member-panel">
+        <div>
+          <h2>JBA Members Area</h2>
+          <p>Member access will connect to the existing JBA Supabase application.</p>
+        </div>
+        <span class="button button-light">Member Login — Coming Next</span>
+      </div>
+      <div class="notice">
+        Member login is not connected yet. We will connect your existing Supabase authentication in the next development stage. No account or password is requested on this page.
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="contact-box">
+        <h2>Get in Touch</h2>
+        <p><strong>Jengraimukh Badminton Association (JBA)</strong></p>
+        <p>Majuli, Assam, India</p>
+        <p>Promoting Badminton. Building Champions.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Jengraimukh Badminton Association</strong></p>
+    <p>Majuli, Assam, India</p>
+    <p class="tagline">Together Stronger</p>
+    <p>© <span id="year"></span> JBA. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+      menuToggle.textContent = isOpen ? '✕' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.textContent = '☰';
+      });
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
